@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
@@ -44,10 +45,16 @@ public class MainApp extends Application {
 	private PokerTableController pokerController = null;
 	private RootLayoutController rootController = null;
 
+	private double dRootLayoutHeight;
+	
 	private boolean isServer = false;
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public double getdRootLayoutHeight() {
+		return dRootLayoutHeight;
 	}
 
 	@Override
@@ -86,27 +93,15 @@ public class MainApp extends Application {
 
 	public void initRootLayout() {
 		try {
-			
-		
+					
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("/poker/app/view/RootLayout.fxml"));
 			
+			rootLayout = (BorderPane) loader.load();			
+			rootLayout.setMaxWidth(600);
 			
-			Screen screen = Screen.getPrimary();
-			Rectangle2D bounds = screen.getVisualBounds();
-
-			primaryStage.setX(25);
-			primaryStage.setY(25);
-			
-			primaryStage.setWidth(bounds.getWidth() / 3);
-			primaryStage.setHeight(bounds.getHeight());
-			
-			
-			
-			rootLayout = (BorderPane) loader.load();
-			
-			rootLayout.setMaxWidth(100);
+			dRootLayoutHeight = rootLayout.getMaxHeight();
 
 			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);	
@@ -137,18 +132,17 @@ public class MainApp extends Application {
 			
 			Screen screen = Screen.getPrimary();
 			Rectangle2D bounds = screen.getVisualBounds();
-
+/*
 			primaryStage.setX(bounds.getMinX());
 			primaryStage.setY(bounds.getMinY());
 			primaryStage.setWidth(bounds.getWidth() / 3);
-			primaryStage.setHeight(bounds.getHeight());
+			primaryStage.setHeight(bounds.getHeight());*/
 			
 			
-			BorderPane pokerOverview = (BorderPane) loader.load();
+			AnchorPane pokerOverview = (AnchorPane) loader.load();
 
-			pokerOverview.setMaxWidth(100);
-			pokerOverview.setMaxHeight(100);
-			
+			pokerOverview.setMaxWidth(bounds.getWidth());
+			pokerOverview.setMaxHeight(bounds.getHeight());					
 			
 			// Set person overview into the center of root layout.
 			rootLayout.setCenter(pokerOverview);

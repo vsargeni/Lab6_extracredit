@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="650.0" prefWidth="850.0"  xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkgPoker.app.controller.RootLayoutController">
+<BorderPane prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pkgPoker.app.controller.RootLayoutController">
    <top>
-      <MenuBar fx:id="mb" prefHeight="0.0" prefWidth="1064.0">
+      <MenuBar fx:id="mb" prefHeight="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="Help">
             <items>
