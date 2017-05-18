@@ -103,7 +103,7 @@ public class PokerTableController implements Initializable {
 
 	private int iDrawCard = 0;
 
-	private int iAnimationLength = 250;
+	private int iAnimationLength = 150;
 
 	public void DealFakeHand(ActionEvent event) {
 
@@ -200,10 +200,10 @@ public class PokerTableController implements Initializable {
 		int iHeight = 96;
 		switch (iCardNbr) {
 		case -1:
-			strImgPath = "/include/img/b1fh.png";
+			strImgPath = "/include/img/b2fh.png";
 			break;
 		case -2:
-			strImgPath = "/include/img/blank.png";
+			strImgPath = "/include/img/spiderman116_spideydancing1.gif";
 			break;
 		case 0:
 			strImgPath = "/include/img/b1fv.png";
@@ -244,10 +244,10 @@ public class PokerTableController implements Initializable {
 			pntCardDealt = FindPoint(getCardHBox(iPosition), iDrawCard);
 
 			Point2D pntDeck = FindPoint(hboxDeck, 0);
-
+			final ImageView img2 =BuildImage(-1);
 			final ImageView img = BuildImage(0);
 			img.setX(pntDeck.getX());
-			img.setY(pntDeck.getY() - 33);
+			img.setY(pntDeck.getY());
 
 			ImageView imgDealCard = BuildImage(11);
 
@@ -259,9 +259,10 @@ public class PokerTableController implements Initializable {
 			ScaleTransition scaleT = CreateScaleTransition(img);
 			PathTransition pathT = CreatePathTransition(pntDeck,
 			 pntCardDealt, img);
+			
 
 			ParallelTransition patTMoveRot = new ParallelTransition();
-			patTMoveRot.getChildren().addAll(rotT, pathT);
+			patTMoveRot.getChildren().addAll( pathT, rotT);
 			// patTMoveRot.getChildren().addAll(pathT, rotT);
 
 			ParallelTransition patTFadeInFadeOut = createFadeTransition(
@@ -300,9 +301,9 @@ public class PokerTableController implements Initializable {
 	private PathTransition CreatePathTransition(Point2D fromPoint, Point2D toPoint, ImageView img) {
 		Path path = new Path();
 		path.getElements().add(new MoveTo(fromPoint.getX(), fromPoint.getY()));
-		path.getElements().add(new CubicCurveTo(toPoint.getX() * 2, toPoint.getY() * 2, toPoint.getX() / 3,
-				toPoint.getY() / 3, toPoint.getX(), toPoint.getY()));
-		// path.getElements().add(new CubicCurveTo(0, 120, 0, 240, 380, 240));
+		//path.getElements().add(new CubicCurveTo(toPoint.getX() * 2, toPoint.getY() * 2, toPoint.getX() / 3,
+			//toPoint.getY() / 3, toPoint.getX(), toPoint.getY()));
+		path.getElements().add(new CubicCurveTo(0, 150, 0, 240, toPoint.getX() +50, toPoint.getY()));
 		PathTransition pathTransition = new PathTransition();
 		pathTransition.setDuration(Duration.millis(750));
 		pathTransition.setPath(path);
@@ -328,8 +329,8 @@ public class PokerTableController implements Initializable {
 	private RotateTransition CreateRotateTransition(ImageView img) {
 
 		RotateTransition rotateTransition = new RotateTransition(Duration.millis(iAnimationLength/2), img);
-		rotateTransition.setByAngle(180F);
-		rotateTransition.setCycleCount(2);
+		rotateTransition.setByAngle(360F);
+		rotateTransition.setCycleCount(10);
 		rotateTransition.setAutoReverse(false);
 
 		return rotateTransition;
@@ -339,11 +340,11 @@ public class PokerTableController implements Initializable {
 
 		TranslateTransition translateTransition = new TranslateTransition(Duration.millis(iAnimationLength), img);
 
-		translateTransition.setFromX(0);
+		//translateTransition.setFromX(0);
 		translateTransition.setToX(toPoint.getX() - fromPoint.getX());
-		translateTransition.setFromY(0);
+		//translateTransition.setFromY(0);
 		translateTransition.setToY(toPoint.getY() - fromPoint.getY());
-		translateTransition.setCycleCount(1);
+		//translateTransition.setCycleCount(1);
 		translateTransition.setAutoReverse(false);
 
 		return translateTransition;
@@ -380,7 +381,7 @@ public class PokerTableController implements Initializable {
 
 	private void FadeButton(Button btn) {
 		FadeTransition ft = new FadeTransition(Duration.millis(iAnimationLength), btn);
-		ft.setFromValue(1.0);
+		ft.setFromValue(5.0);
 		ft.setToValue(0.3);
 		ft.setCycleCount(4);
 		ft.setAutoReverse(true);
